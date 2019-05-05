@@ -24,4 +24,5 @@ Mordhau dedicated server one-liner start script for an AWS EC2 Ubuntu 18.04 inst
 
 ## Problems / bugs
 
-1. Engine.ini gets cleared unless write permissions are restricted
+1. Currently error towards the end of script, need to test more
+2. Engine.ini gets cleared unless write permissions are restricted
