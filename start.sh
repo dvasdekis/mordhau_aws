@@ -25,7 +25,6 @@ EOF
 # create directory for game.ini
 /usr/bin/sudo -u mord mkdir -p /home/mord/mordhau/Mordhau/Saved/Config/LinuxServer
 
-# ALL USER PROMPTS GO HERE
 # prompt for steam username and password
 while [[ -z $steam_username ]]; do
   read -p "Enter Steam username: " steam_username
@@ -61,8 +60,6 @@ while [[ -z $tickrate || $tickrate -lt 30 ]]; do
   read -p "Set tickrate (Default 30): " tickrate
 done
 
-# END USER PROMPTS (except admins)
-
 # Takes the parameters of steam_username and steam_password
 /usr/bin/sudo -u mord /home/mord/steamcmd.sh +login "$steam_username" "$steam_password" +runscript update_mordhau.txt
 
@@ -71,7 +68,7 @@ unset $steam_username
 unset $steam_password
 unset $steam_password_check
 
-# Edit the below to set server configuration - get admin steam ids from steamid.io
+# cat Game.ini
 /usr/bin/sudo -u mord cat << EOF > /home/mord/mordhau/Mordhau/Saved/Config/LinuxServer/Game.ini
 [/Script/Mordhau.MordhauGameMode]
 PlayerRespawnTime=5.000000
@@ -80,39 +77,100 @@ CatapultRespawnTime=30.000000
 HorseRespawnTime=30.000000
 DamageFactor=1.000000
 TeamDamageFactor=0.500000
-MapRotation=FL_Taiga
-MapRotation=FL_MountainPeak
-MapRotation=FL_Camp
-MapRotation=FL_Grad
+EOF
 
+# map settings prompts
+while true; do
+    read -p "Add FL maps to rotation? (y/n) " yn
+    case $yn in
+        [Yy]* )
+        /usr/bin/sudo -u mord echo "MapRotation=FL_Taiga" >> /home/mord/mordhau/Mordhau/Saved/Config/LinuxServer/Game.ini
+        /usr/bin/sudo -u mord echo "MapRotation=FL_MountainPeak" >> /home/mord/mordhau/Mordhau/Saved/Config/LinuxServer/Game.ini
+        /usr/bin/sudo -u mord echo "MapRotation=FL_Camp" >> /home/mord/mordhau/Mordhau/Saved/Config/LinuxServer/Game.ini
+        /usr/bin/sudo -u mord echo "MapRotation=FL_Grad" >> /home/mord/mordhau/Mordhau/Saved/Config/LinuxServer/Game.ini
+        ;;
+        * ) break;;
+    esac
+done
+
+while true; do
+    read -p "Add HRD maps to rotation? (y/n) " yn
+    case $yn in
+        [Yy]* )
+        /usr/bin/sudo -u mord echo "MapRotation=HRD_Taiga" >> /home/mord/mordhau/Mordhau/Saved/Config/LinuxServer/Game.ini
+        /usr/bin/sudo -u mord echo "MapRotation=HRD_MountainPeak" >> /home/mord/mordhau/Mordhau/Saved/Config/LinuxServer/Game.ini
+        /usr/bin/sudo -u mord echo "MapRotation=HRD_Camp" >> /home/mord/mordhau/Mordhau/Saved/Config/LinuxServer/Game.ini
+        /usr/bin/sudo -u mord echo "MapRotation=HRD_Grad" >> /home/mord/mordhau/Mordhau/Saved/Config/LinuxServer/Game.ini
+        ;;
+        * ) break;;
+    esac
+done
+
+while true; do
+    read -p "Add BR maps to rotation? (y/n) " yn
+    case $yn in
+        [Yy]* )
+        /usr/bin/sudo -u mord echo "MapRotation=BR_Taiga" >> /home/mord/mordhau/Mordhau/Saved/Config/LinuxServer/Game.ini
+        /usr/bin/sudo -u mord echo "MapRotation=BR_Grad" >> /home/mord/mordhau/Mordhau/Saved/Config/LinuxServer/Game.ini
+        ;;
+        * ) break;;
+    esac
+done
+
+while true; do
+    read -p "Add SKM maps to rotation? (y/n) " yn
+    case $yn in
+        [Yy]* )
+        /usr/bin/sudo -u mord echo "MapRotation=SKM_Grad" >> /home/mord/mordhau/Mordhau/Saved/Config/LinuxServer/Game.ini
+        /usr/bin/sudo -u mord echo "MapRotation=SKM_MountainPeak" >> /home/mord/mordhau/Mordhau/Saved/Config/LinuxServer/Game.ini
+        /usr/bin/sudo -u mord echo "MapRotation=SKM_Camp" >> /home/mord/mordhau/Mordhau/Saved/Config/LinuxServer/Game.ini
+        /usr/bin/sudo -u mord echo "MapRotation=SKM_Tourney" >> /home/mord/mordhau/Mordhau/Saved/Config/LinuxServer/Game.ini
+        /usr/bin/sudo -u mord echo "MapRotation=SKM_ThePit" >> /home/mord/mordhau/Mordhau/Saved/Config/LinuxServer/Game.ini
+        /usr/bin/sudo -u mord echo "MapRotation=SKM_Contraband" >> /home/mord/mordhau/Mordhau/Saved/Config/LinuxServer/Game.ini
+        /usr/bin/sudo -u mord echo "MapRotation=SKM_Taiga" >> /home/mord/mordhau/Mordhau/Saved/Config/LinuxServer/Game.ini
+        ;;
+        * ) break;;
+    esac
+done
+
+while true; do
+    read -p "Add FFA maps to rotation? (y/n) " yn
+    case $yn in
+        [Yy]* )
+        /usr/bin/sudo -u mord echo "MapRotation=FFA_Grad" >> /home/mord/mordhau/Mordhau/Saved/Config/LinuxServer/Game.ini
+        /usr/bin/sudo -u mord echo "MapRotation=FFA_MountainPeak" >> /home/mord/mordhau/Mordhau/Saved/Config/LinuxServer/Game.ini
+        /usr/bin/sudo -u mord echo "MapRotation=FFA_Camp" >> /home/mord/mordhau/Mordhau/Saved/Config/LinuxServer/Game.ini
+        /usr/bin/sudo -u mord echo "MapRotation=FFA_Tourney" >> /home/mord/mordhau/Mordhau/Saved/Config/LinuxServer/Game.ini
+        /usr/bin/sudo -u mord echo "MapRotation=FFA_ThePit" >> /home/mord/mordhau/Mordhau/Saved/Config/LinuxServer/Game.ini
+        /usr/bin/sudo -u mord echo "MapRotation=FFA_Contraband" >> /home/mord/mordhau/Mordhau/Saved/Config/LinuxServer/Game.ini
+        /usr/bin/sudo -u mord echo "MapRotation=FFA_Taiga" >> /home/mord/mordhau/Mordhau/Saved/Config/LinuxServer/Game.ini
+        ;;
+        * ) break;;
+    esac
+done
+
+while true; do
+    read -p "Add TDM maps to rotation? (y/n) " yn
+    case $yn in
+        [Yy]* )
+        /usr/bin/sudo -u mord echo "MapRotation=TDM_Grad" >> /home/mord/mordhau/Mordhau/Saved/Config/LinuxServer/Game.ini
+        /usr/bin/sudo -u mord echo "MapRotation=TDM_MountainPeak" >> /home/mord/mordhau/Mordhau/Saved/Config/LinuxServer/Game.ini
+        /usr/bin/sudo -u mord echo "MapRotation=TDM_Camp" >> /home/mord/mordhau/Mordhau/Saved/Config/LinuxServer/Game.ini
+        /usr/bin/sudo -u mord echo "MapRotation=TDM_Tourney" >> /home/mord/mordhau/Mordhau/Saved/Config/LinuxServer/Game.ini
+        /usr/bin/sudo -u mord echo "MapRotation=TDM_ThePit" >> /home/mord/mordhau/Mordhau/Saved/Config/LinuxServer/Game.ini
+        /usr/bin/sudo -u mord echo "MapRotation=TDM_Contraband" >> /home/mord/mordhau/Mordhau/Saved/Config/LinuxServer/Game.ini
+        /usr/bin/sudo -u mord echo "MapRotation=TDM_Taiga" >> /home/mord/mordhau/Mordhau/Saved/Config/LinuxServer/Game.ini
+        ;;
+        * ) break;;
+    esac
+done
+
+sudo -u mord cat << EOF >> /home/mord/mordhau/Mordhau/Saved/Config/LinuxServer/Game.ini
 [/Script/Mordhau.MordhauGameSession]
 ServerPassword=
 AdminPassword=
 BannedPlayers=()
 EOF
-
-# Removed maps
-# MapRotation=SKM_Grad
-# MapRotation=SKM_MountainPeak
-# MapRotation=SKM_Camp
-# MapRotation=SKM_Tourney
-# MapRotation=SKM_ThePit
-# MapRotation=SKM_Contraband
-# MapRotation=SKM_Taiga
-# MapRotation=FFA_ThePit
-# MapRotation=TDM_Camp
-# MapRotation=FFA_Contraband
-# MapRotation=TDM_Tourney
-# MapRotation=FFA_Taiga
-# MapRotation=TDM_ThePit
-# MapRotation=FFA_Grad
-# MapRotation=TDM_Contraband
-# MapRotation=FFA_MountainPeak
-# MapRotation=TDM_Taiga
-# MapRotation=FFA_Camp
-# MapRotation=TDM_Grad
-# MapRotation=FFA_Tourney
-# MapRotation=TDM_MountainPeak
 
 # set admins
 while true; do
@@ -130,6 +188,7 @@ done
 /usr/bin/sudo -u mord echo "MaxSlots=$server_slots" >> /home/mord/mordhau/Mordhau/Saved/Config/LinuxServer/Game.ini
 
 # set default map
+chmod chmod a+w /home/mord/mordhau/Mordhau/Saved/Config/LinuxServer/Engine.ini # in case script is re-run
 /usr/bin/sudo -u mord cat << EOF > /home/mord/mordhau/Mordhau/Saved/Config/LinuxServer/Engine.ini
 [/Script/EngineSettings.GameMapsSettings]
 ServerDefaultMap=/Game/Mordhau/Maps/TaigaMap/FL_Taiga.FL_Taiga
