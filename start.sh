@@ -79,7 +79,7 @@ DamageFactor=1.000000
 TeamDamageFactor=0.500000
 EOF
 
-# map settings prompts
+# map settings prompts - need to add invalid response vs no
 while true; do
     read -p "Add FL maps to rotation? (y/n) " yn
     case $yn in
@@ -187,7 +187,7 @@ done
 # set maxslots
 /usr/bin/sudo -u mord echo "MaxSlots=$server_slots" >> /home/mord/mordhau/Mordhau/Saved/Config/LinuxServer/Game.ini
 
-# set default map
+# set default map - need to add invalid responses
 echo "Available maps: "
 echo "Grad (All modes)"
 echo "Taiga (All modes)"
@@ -198,19 +198,19 @@ echo "ThePit (TDM/FFA/SKM only)"
 echo "Tourney (TDM/FFA/SKM only)"
 echo
 
-while [[ -z $map1_mode ]]; do
-  read -p "Specify initial map mode (default FFA): " map1_mode
+while [[ -z $mode1 ]]; do
+  read -p "Specify initial map mode (default FFA): " mode1
 done
 
 while [[ -z $map1 ]]; do
   read -p "Specify initial map (default ThePit): " map1
 done
 
-chmod chmod a+w /home/mord/mordhau/Mordhau/Saved/Config/LinuxServer/Engine.ini # in case script is re-run
+chmod a+w /home/mord/mordhau/Mordhau/Saved/Config/LinuxServer/Engine.ini # in case script is re-run
 /usr/bin/sudo -u mord cat << EOF > /home/mord/mordhau/Mordhau/Saved/Config/LinuxServer/Engine.ini
 [/Script/EngineSettings.GameMapsSettings]
 EOF
-/usr/bin/sudo -u mord echo "ServerDefaultMap=/Game/Mordhau/Maps/`$map1`Map/$map1_mode`_`$map1`.`$map1_mode`_`$map1" >> /home/mord/mordhau/Mordhau/Saved/Config/LinuxServer/Engine.ini
+/usr/bin/sudo -u mord echo "ServerDefaultMap=/Game/Mordhau/Maps/$map1\Map/$mode1\_$map1.$mode1\_$map1" >> /home/mord/mordhau/Mordhau/Saved/Config/LinuxServer/Engine.ini
 
 # set tickrate and append to server name if greater than default
 if [[ $tickrate -gt 30 ]]; then
