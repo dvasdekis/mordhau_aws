@@ -122,7 +122,7 @@ while true; do
         read -p "Enter admin SteamID: " add_admin
         echo "Admins=$add_admin" >> /home/mord/mordhau/Mordhau/Saved/Config/LinuxServer/Game.ini
         ;;
-        * ) echo "Admins=" >> /home/mord/mordhau/Mordhau/Saved/Config/LinuxServer/Game.ini; exit;;
+        * ) echo "Admins=" >> /home/mord/mordhau/Mordhau/Saved/Config/LinuxServer/Game.ini; break;;
     esac
 done
 
