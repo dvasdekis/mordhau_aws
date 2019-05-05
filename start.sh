@@ -210,7 +210,7 @@ chmod a+w /home/mord/mordhau/Mordhau/Saved/Config/LinuxServer/Engine.ini # in ca
 /usr/bin/sudo -u mord cat << EOF > /home/mord/mordhau/Mordhau/Saved/Config/LinuxServer/Engine.ini
 [/Script/EngineSettings.GameMapsSettings]
 EOF
-/usr/bin/sudo -u mord echo "ServerDefaultMap=/Game/Mordhau/Maps/'"$map1"'\Map/'"$mode1"'\_'"$map1"'.'"$mode1"'\_'"$map1"'" >> /home/mord/mordhau/Mordhau/Saved/Config/LinuxServer/Engine.ini
+/usr/bin/sudo -u mord echo "ServerDefaultMap=/Game/Mordhau/Maps/"$map1"Map/"$mode1"_"$map1"."$mode1"_"$map1"" >> /home/mord/mordhau/Mordhau/Saved/Config/LinuxServer/Engine.ini
 
 # set tickrate and append to server name if greater than default
 if [[ $tickrate -gt 30 ]]; then
