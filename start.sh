@@ -174,7 +174,7 @@ EOF
 
 # set admins
 while true; do
-    read -p "Do you wish to nominate additional server admins? (y/n) " yn
+    read -p "Do you wish to nominate additional server admins? (y/n, must be at least one) " yn
     case $yn in
         [Yy]* )
         read -p "Enter admin SteamID: " add_admin
@@ -206,16 +206,20 @@ while [[ -z $map1 ]]; do
   read -p "Specify initial map (default ThePit): " map1
 done
 
+# problem occurs after this point !!! to be tested
+
 chmod a+w /home/mord/mordhau/Mordhau/Saved/Config/LinuxServer/Engine.ini # in case script is re-run
 /usr/bin/sudo -u mord cat << EOF > /home/mord/mordhau/Mordhau/Saved/Config/LinuxServer/Engine.ini
 [/Script/EngineSettings.GameMapsSettings]
 EOF
-/usr/bin/sudo -u mord echo "ServerDefaultMap=/Game/Mordhau/Maps/"$map1"Map/"$mode1"_"$map1"."$mode1"_"$map1"" >> /home/mord/mordhau/Mordhau/Saved/Config/LinuxServer/Engine.ini
 
-# set tickrate and append to server name if greater than default
+# set default map and tickrate
+/usr/bin/sudo -u mord echo "ServerDefaultMap=/Game/Mordhau/Maps/"$map1"Map/"$mode1"_"$map1"."$mode1"_"$map1"" >> /home/mord/mordhau/Mordhau/Saved/Config/LinuxServer/Engine.ini
+/usr/bin/sudo -u mord echo "[/Script/OnlineSubsystemUtils.IpNetDriver]" >> /home/mord/mordhau/Mordhau/Saved/Config/LinuxServer/Engine.ini
+/usr/bin/sudo -u mord echo "NetServerMaxTickRate=$tickrate" >> /home/mord/mordhau/Mordhau/Saved/Config/LinuxServer/Engine.ini
+
+# append tickrate to server name if greater than default
 if [[ $tickrate -gt 30 ]]; then
-  /usr/bin/sudo -u mord echo "[/Script/OnlineSubsystemUtils.IpNetDriver]" >> /home/mord/mordhau/Mordhau/Saved/Config/LinuxServer/Engine.ini
-  /usr/bin/sudo -u mord echo "NetServerMaxTickRate=$tickrate" >> /home/mord/mordhau/Mordhau/Saved/Config/LinuxServer/Engine.ini
   /usr/bin/sudo -u mord echo "ServerName=$server_name ($tickrate tickrate)" >> /home/mord/mordhau/Mordhau/Saved/Config/LinuxServer/Game.ini
 else
   /usr/bin/sudo -u mord echo "ServerName=$server_name" >> /home/mord/mordhau/Mordhau/Saved/Config/LinuxServer/Game.ini
