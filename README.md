@@ -24,5 +24,4 @@ Mordhau dedicated server one-liner start script for an AWS EC2 Ubuntu 18.04 inst
 
 ## Problems / bugs
 
-1. 'Failed to join server' on first few attempts
-2. Engine.ini gets cleared unless write permissions are restricted
+1. Engine.ini gets cleared unless write permissions are restricted
