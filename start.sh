@@ -188,10 +188,35 @@ done
 /usr/bin/sudo -u mord echo "MaxSlots=$server_slots" >> /home/mord/mordhau/Mordhau/Saved/Config/LinuxServer/Game.ini
 
 # set default map
+echo "Available maps: "
+echo
+echo "Grad (All modes)"
+echo
+echo "Taiga (All modes)"
+echo
+echo "MountainPeak (HRD/FL/TDM/FFA/SKM only)"
+echo
+echo "Camp (HRD/FL/TDM/FFA/SKM only)"
+echo
+echo "Contraband (TDM/FFA/SKM only)"
+echo
+echo "ThePit (TDM/FFA/SKM only)"
+echo
+echo "Tourney (TDM/FFA/SKM only)"
+echo
+
+while [[ -z $map1_mode ]]; do
+  read -p "Specify initial map mode (default FFA): " map1_mode
+done
+
+while [[ -z $map1 ]]; do
+  read -p "Specify initial map (default ThePit): " map1
+done
+
 chmod chmod a+w /home/mord/mordhau/Mordhau/Saved/Config/LinuxServer/Engine.ini # in case script is re-run
 /usr/bin/sudo -u mord cat << EOF > /home/mord/mordhau/Mordhau/Saved/Config/LinuxServer/Engine.ini
 [/Script/EngineSettings.GameMapsSettings]
-ServerDefaultMap=/Game/Mordhau/Maps/TaigaMap/FL_Taiga.FL_Taiga
+ServerDefaultMap=/Game/Mordhau/Maps/`$map1`Map/`$map1_mode`_`$map1`.`$map1_mode`_`$map1`
 EOF
 
 # set tickrate and append to server name if greater than default
