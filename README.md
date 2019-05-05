@@ -18,7 +18,7 @@ Mordhau dedicated server one-liner start script for an AWS EC2 Ubuntu 18.04 inst
 
 ## To do (no particular order)
 
-1. Interactive script improvements (select map rotation and default map, right now it's FL maps by default). Perhaps have user specify github gist file link to use their own configs
+1. Interactive script improvements, perhaps have user specify Github gist file link to use their own configs
 2. Can't login anonymously for Mordhau but look into future possibility of running bootstrap without SSH in (right now it's needed for Steam Guard    authentication, so might as well have the other interactive details there)
 3. Clean up bash script
 
