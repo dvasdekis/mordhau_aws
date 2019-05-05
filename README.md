@@ -10,7 +10,7 @@ Mordhau dedicated server one-liner start script for an AWS EC2 Ubuntu 18.04 inst
 
 2. SSH in and run
 
-      `curl -LJO https://raw.githubusercontent.com/TimHugall/mordhau_aws/dev_ubuntu/start.sh && sudo bash start.sh`
+      `curl -LJO https://raw.githubusercontent.com/TimHugall/mordhau_aws/master/start.sh && sudo bash start.sh`
 
 3. Enter Steam username, password, authentication code and server details when prompted
 
