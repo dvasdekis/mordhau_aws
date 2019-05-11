@@ -53,12 +53,12 @@ done
 
 # server slots prompt
 while [[ -z $server_slots || $server_slots -lt 6 ]]; do
-  read -p "Enter server slots (minimum 6): " server_slots
+  read -e -p "Enter server slots (minimum 6): " -i "64" server_slots
 done
 
 # tickrate prompt
 while [[ -z $tickrate || $tickrate -lt 30 ]]; do
-  read -p "Set tickrate (Default 30): " tickrate
+  read -e -p "Set tickrate (Default 30): " -i "30" tickrate
 done
 
 # END USER PROMPTS (except admins)
